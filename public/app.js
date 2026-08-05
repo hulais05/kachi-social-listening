@@ -3,6 +3,99 @@
    Connected to Production Express REST API & Persistent Database
    ========================================================================== */
 
+const INITIAL_POSTS = [
+  {
+    id: "post-1",
+    author: "Minería Sustentable",
+    role: "Medio de Comunicación Minero & Ambiental",
+    platform: "linkedin",
+    title: "Kachi: Catamarca abrió la consulta pública ambiental y el proyecto de litio de Lake Resources entra en su etapa final de aprobación",
+    content: "El Ministerio de Minería de Catamarca dio inicio a la participación ciudadana del Informe de Impacto Ambiental de Kachi, que se extenderá durante todo agosto y cerrará con una audiencia pública el 27 en la localidad de El Peñón. Lake Resources y Lilac Solutions esperan obtener la DIA antes de fin de septiembre. #MineríaSustentable #Kachi #LilacSolutions #Litio",
+    url: "https://lnkd.in/d3kr7j_q",
+    likes: 142,
+    shares: 28,
+    commentsCount: 19,
+    sentiment: "positivo",
+    date: "2026-08-04",
+    comments: [
+      { author: "Ing. Carlos Mendoza", role: "Especialista en Hidrogeología", text: "Excelente avance para la minería sostenible en la Puna. La tecnología DLE de Lilac Solutions con reinyección de salmuera marca la diferencia en el cuidado del acuífero.", sentiment: "positivo" },
+      { author: "Mariana Albornoz", role: "Consultora EHS Salta", text: "Importante que se garantice el acceso a la documentación completa para los pobladores de El Peñón previo al 27 de agosto.", sentiment: "neutro" },
+      { author: "Comunidad Antofagasta", role: "Vecino Autoconvocado", text: "Queremos conocer en detalle las tasas de uso de agua dulce en la planta de procesamiento de Lilac.", sentiment: "inquietud" },
+      { author: "Lic. Javier Ruiz", role: "Analista de Mercados Mineros", text: "Gran paso para Lake Resources y Lilac Solutions para validar su modelo comercial en Argentina.", sentiment: "positivo" }
+    ]
+  },
+  {
+    id: "post-2",
+    author: "Bárbara Cozzi",
+    role: "Country Manager & Regional General Counsel @ Lake Resources",
+    platform: "linkedin",
+    title: "Un hito clave para Kachi: Inicio de la Consulta Pública en Catamarca",
+    content: "Orgullosos de presentar el trabajo riguroso de todo el equipo técnico y ambiental para el IIA de Kachi. Abrimos el diálogo transparente con las comunidades de El Peñón y toda la provincia rumbo a la Audiencia Pública del 27 de agosto. Agradecida al equipo de Lilac Solutions y a las autoridades de Minería de Catamarca.",
+    url: "https://www.linkedin.com/company/lake-resources",
+    likes: 310,
+    shares: 64,
+    commentsCount: 38,
+    sentiment: "positivo",
+    date: "2026-08-03",
+    comments: [
+      { author: "Esteban Gutierrez", role: "Proveedor Minero NOA", text: "Felicitaciones Bárbara y a todo el equipo de Lake y Lilac! Gran impulso para la cadena de valor local en Catamarca.", sentiment: "positivo" },
+      { author: "Luciana Molina", role: "Talent Acquisition Specialist", text: "Éxitos en esta instancia determinante para el desarrollo del proyecto Kachi!", sentiment: "positivo" },
+      { author: "Dra. Sofía Peralta", role: "Abogada Ambiental", text: "¿La documentación técnica estará disponible en la oficina comunitaria de El Peñón durante todo el mes?", sentiment: "neutro" }
+    ]
+  },
+  {
+    id: "post-3",
+    author: "Fuerza Minera",
+    role: "Portal Noticias Mineras Argentina",
+    platform: "web",
+    title: "Catamarca fija fecha para la Audiencia Pública del proyecto de litio Kachi",
+    content: "El 27 de agosto se llevará a cabo la audiencia en El Peñón. La empresa busca la aprobación del Informe de Impacto Ambiental para iniciar la fase de financiamiento directo de la construcción de la planta de Extracción Directa de Litio impulsada por Lilac Solutions.",
+    url: "https://fuerzaminera.com/kachi-catamarca-consulta-publica",
+    likes: 85,
+    shares: 14,
+    commentsCount: 8,
+    sentiment: "positivo",
+    date: "2026-08-04",
+    comments: [
+      { author: "Hugo Ferreyra", role: "Técnico Químico", text: "El sistema DLE de intercambiadores de iones patentado por Lilac permite procesar salmuera con alto rendimiento sin depender de grandes piletas de evaporación.", sentiment: "positivo" }
+    ]
+  },
+  {
+    id: "post-4",
+    author: "InfoMinero Argentina",
+    role: "Red de Información Minera",
+    platform: "linkedin",
+    title: "Tecnología DLE de Lilac Solutions y Lake Resources bajo escrutinio público",
+    content: "Con el inicio de la participación ciudadana del IIA de Kachi, se difunden las especificaciones del proceso de extracción directa de Lilac y reinyección ambiental superior al 95%. La resolución de la DIA se proyecta para finales de septiembre de 2026.",
+    url: "https://infomineroarg.com/kachi-participacion-ciudadana",
+    likes: 198,
+    shares: 31,
+    commentsCount: 15,
+    sentiment: "positivo",
+    date: "2026-08-04",
+    comments: [
+      { author: "Martín Hulais", role: "Especialista en Gestión Ambiental & Cierre de Minas", text: "Un caso de estudio relevante para el NOA sobre evaluación de impacto ambiental con tecnologías de baja huella hídrica.", sentiment: "positivo" }
+    ]
+  },
+  {
+    id: "post-5",
+    author: "Futuro Sustentable",
+    role: "Medio Especializado en ESG & Medio Ambiente",
+    platform: "web",
+    title: "Participación Ciudadana en Catamarca: IIA del Proyecto Kachi",
+    content: "Detalle de los talleres informativos y mesas de trabajo comunitarias planificadas por Lake Resources y Lilac Solutions durante agosto en la zona de influencia directa de Carachi Pampa y El Peñón.",
+    url: "https://futurosustentable.com.ar/participacion-kachi",
+    likes: 76,
+    shares: 12,
+    commentsCount: 6,
+    sentiment: "neutro",
+    date: "2026-08-05",
+    comments: [
+      { author: "Laura Benítez", role: "Socióloga Ambiental", text: "Es clave que las traducciones explicativas del informe sean accesibles para todos los pobladores locales.", sentiment: "neutro" }
+    ]
+  }
+];
+
 let postsData = [];
 let isSimulating = false;
 let simulateInterval = null;
@@ -20,13 +113,20 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchPostsAndInit() {
   try {
     const res = await fetch(`${API_BASE}/api/posts`);
+    if (!res.ok) throw new Error("API not available");
     const json = await res.json();
-    if (json.success && json.data) {
+    if (json.success && json.data && json.data.length > 0) {
       postsData = json.data;
+    } else {
+      postsData = INITIAL_POSTS;
     }
   } catch (err) {
-    console.warn("API Offline, falling back to local dataset", err);
-    postsData = JSON.parse(localStorage.getItem("kachi_lilac_posts_data")) || [];
+    console.log("Cargando catálogo inicial de publicaciones...");
+    postsData = JSON.parse(localStorage.getItem("kachi_lilac_posts_data")) || INITIAL_POSTS;
+  }
+
+  if (!postsData || postsData.length === 0) {
+    postsData = INITIAL_POSTS;
   }
 
   initDashboard();
@@ -58,7 +158,6 @@ function renderKPIs() {
 
 // Render Charts with Lilac Colors (#C598FE, #A855F7, #34D399, #FBBF24)
 function renderCharts() {
-  // Chart 1: Trend Line
   const ctxTrend = document.getElementById("chartTrend").getContext("2d");
   if (chartTrendInstance) chartTrendInstance.destroy();
 
@@ -100,7 +199,6 @@ function renderCharts() {
     }
   });
 
-  // Chart 2: Sentiment Doughnut
   const ctxSentiment = document.getElementById("chartSentiment").getContext("2d");
   if (chartSentimentInstance) chartSentimentInstance.destroy();
 
@@ -128,7 +226,6 @@ function renderCharts() {
     }
   });
 
-  // Chart 3: Platforms Breakdown
   const ctxPlatforms = document.getElementById("chartPlatforms").getContext("2d");
   if (chartPlatformsInstance) chartPlatformsInstance.destroy();
 
@@ -290,7 +387,7 @@ function setupEventListeners() {
   document.getElementById("filterPlatform").onchange = renderPostsList;
   document.getElementById("filterSentiment").onchange = renderPostsList;
 
-  // Add Form Submit via API
+  // Add Form Submit
   document.getElementById("addPostForm").onsubmit = async (e) => {
     e.preventDefault();
 
@@ -326,12 +423,12 @@ function setupEventListeners() {
         postsData.unshift(json.data);
       }
     } catch (err) {
-      console.warn("API Error saving post, saving locally", err);
       newPostData.id = "post-" + Date.now();
       newPostData.date = new Date().toISOString().split('T')[0];
       postsData.unshift(newPostData);
     }
 
+    localStorage.setItem("kachi_lilac_posts_data", JSON.stringify(postsData));
     initDashboard();
     document.getElementById("addPostModal").classList.remove("active");
     document.getElementById("addPostForm").reset();
