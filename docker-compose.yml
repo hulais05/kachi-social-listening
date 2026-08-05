@@ -1,0 +1,12 @@
+services:
+  kachi-media-monitor:
+    build: .
+    container_name: lilac_kachi_monitor
+    ports:
+      - "8085:8085"
+    environment:
+      - PORT=8085
+      - NODE_ENV=production
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

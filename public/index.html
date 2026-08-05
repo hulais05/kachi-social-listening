@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lilac Solutions - Kachi Media Monitor | Live Intelligence</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js for analytics graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header with Lilac Solutions Branding -->
+  <header class="top-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo-container">
+          <!-- Official Lilac Solutions SVG Logo -->
+          <svg class="lilac-svg-logo" viewBox="0 0 343 64" xmlns="http://www.w3.org/2000/svg">
+            <title>Lilac Solutions</title>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0151367 0H24.3908V42.2362H67.045V63.3861H26.1244C11.7049 63.3861 0.0151367 51.4996 0.0151367 36.8375V0ZM72.5303 63.3903L94.0928 63.4158V5.27577e-05H72.6261L72.5303 63.3903ZM99.616 5.27577e-05H123.992V42.2362H166.646V63.3861H125.725C111.306 63.3861 99.616 51.4996 99.616 36.8375V5.27577e-05ZM198.239 5.27577e-05H233.933C248.353 5.27577e-05 260.043 11.8865 260.043 26.5486V63.3861H237.567V24.5951H194.605V63.3861H172.129V26.5486C172.129 11.8865 183.819 5.27577e-05 198.239 5.27577e-05ZM233.715 46.041C233.715 55.9595 225.807 64 216.053 64C206.299 64 198.391 55.9595 198.391 46.041C198.391 36.1226 206.299 28.0821 216.053 28.0821C225.807 28.0821 233.715 36.1226 233.715 46.041ZM292.836 24.5951H343V5.27577e-05H289.285C275.716 5.27577e-05 264.714 11.1873 264.714 24.985V38.4139C264.714 52.2115 275.716 63.3988 289.285 63.3988H343V38.8038H292.836C289.71 38.8038 287.177 36.2273 287.177 33.0491V30.3498C287.177 27.1716 289.71 24.5951 292.836 24.5951Z" fill="#C598FE"/>
+          </svg>
+        </div>
+        <div class="brand-divider"></div>
+        <div class="brand-title">
+          <h1>KACHI <span>MEDIA MONITOR</span></h1>
+          <p>Lake Resources & Lilac Solutions • Direct Lithium Extraction (DLE) Catamarca</p>
+        </div>
+      </div>
+
+      <!-- Header Action Buttons - Fixed Single Line Pill Styling -->
+      <div class="header-actions">
+        <div class="live-badge" id="liveStatus">
+          <span class="pulse-dot"></span> MONITOREO LILAC
+        </div>
+        <button class="btn btn-secondary" id="btnToggleSimulate">
+          <i class="fa-solid fa-bolt"></i> Simular Tráfico Vivo
+        </button>
+        <button class="btn btn-primary" id="btnOpenAddModal">
+          <i class="fa-solid fa-plus"></i> Registrar Publicación
+        </button>
+        <button class="btn btn-outline" id="btnExportData">
+          <i class="fa-solid fa-download"></i> Exportar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Container -->
+  <main class="dashboard-main">
+
+    <!-- SF-Style Alert Status & Milestone Banner -->
+    <section class="banner-milestone">
+      <div class="banner-icon">
+        <i class="fa-solid fa-droplet"></i>
+      </div>
+      <div class="banner-text">
+        <div class="eyebrow">● SAN FRANCISCO TECH MONITORING ARCHITECTURE</div>
+        <h3>Consulta Pública e IIA - Proyecto Kachi (El Peñón, Catamarca)</h3>
+        <p>Seguimiento de la opinión pública, redes y medios sobre el avance regulatorio y la tecnología DLE para la <strong>Audiencia Pública del 27 de Agosto en El Peñón</strong>.</p>
+      </div>
+      <div class="banner-countdown">
+        <div class="countdown-unit">
+          <span id="cdDays">22</span>
+          <small>Días para la Audiencia</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Summary Grid with Silicon Valley Delta Indicators -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span>Publicaciones Relevadas</span>
+          <i class="fa-solid fa-newspaper text-lilac"></i>
+        </div>
+        <div class="kpi-value" id="kpiPosts">18</div>
+        <div class="kpi-sub positive">
+          <i class="fa-solid fa-arrow-up"></i> +38% vs semana previa
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span>Likes / Reacciones Totales</span>
+          <i class="fa-solid fa-thumbs-up text-lilac-light"></i>
+        </div>
+        <div class="kpi-value" id="kpiLikes">1,420</div>
+        <div class="kpi-sub positive">
+          <i class="fa-solid fa-arrow-up"></i> +24% en LinkedIn
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span>Comentarios Analizados</span>
+          <i class="fa-solid fa-comments text-lilac"></i>
+        </div>
+        <div class="kpi-value" id="kpiComments">164</div>
+        <div class="kpi-sub neutral">
+          <i class="fa-solid fa-circle-info"></i> 74% de consultas técnicas
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span>Alcance Estimado</span>
+          <i class="fa-solid fa-eye text-emerald"></i>
+        </div>
+        <div class="kpi-value" id="kpiReach">48.5K</div>
+        <div class="kpi-sub positive">
+          <i class="fa-solid fa-chart-line"></i> Impresiones combinadas
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span>Aceptación / Favorabilidad</span>
+          <i class="fa-solid fa-face-smile text-amber"></i>
+        </div>
+        <div class="kpi-value" id="kpiSentiment">75% <small>Positivo</small></div>
+        <div class="kpi-sub positive">
+          <i class="fa-solid fa-check"></i> Interés en DLE sustentable
+        </div>
+      </div>
+    </section>
+
+    <!-- Analytics Charts Section -->
+    <section class="charts-section">
+      <div class="chart-card large">
+        <div class="chart-header">
+          <div>
+            <h3>Evolución Diaria de Alcance e Interacciones</h3>
+            <p>Monitoreo del volumen de conversación acumulado hacia la Audiencia del 27 de Agosto</p>
+          </div>
+          <div class="chart-badge">Agosto 2026</div>
+        </div>
+        <div class="chart-body">
+          <canvas id="chartTrend"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <h3>Desglose de Sentimiento</h3>
+            <p>Análisis cualitativo de comentarios</p>
+          </div>
+        </div>
+        <div class="chart-body doughnut-container">
+          <canvas id="chartSentiment"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <h3>Distribución por Plataforma</h3>
+            <p>Volumen de menciones por medio</p>
+          </div>
+        </div>
+        <div class="chart-body">
+          <canvas id="chartPlatforms"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Posts Feed and Control Panel -->
+    <section class="feed-section">
+      <div class="feed-controls">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Buscar por medio, autor, palabra clave, DLE, El Peñón...">
+        </div>
+
+        <div class="filter-group">
+          <label><i class="fa-solid fa-filter"></i> Plataforma:</label>
+          <select id="filterPlatform">
+            <option value="all">Todas las Plataformas</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="web">Portales Web / Diarios</option>
+          </select>
+
+          <label>Sentimiento:</label>
+          <select id="filterSentiment">
+            <option value="all">Todos los Sentimientos</option>
+            <option value="positivo">🟢 Positivo (Apoyo / DLE)</option>
+            <option value="neutro">🟡 Neutro (Informativo / Consultas)</option>
+            <option value="inquietud">🔴 Inquietud Ambiental</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="posts-list" id="postsList">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Ver Comentarios y Detalle -->
+  <div class="modal-backdrop" id="commentsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalPostTitle">Detalle de Publicación y Comentarios</h3>
+          <p id="modalPostSource" class="modal-subtitle">Minería Sustentable • LinkedIn</p>
+        </div>
+        <button class="modal-close" id="btnCloseCommentsModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="post-preview-box" id="modalPostSnippet">
+          <!-- Snippet content -->
+        </div>
+
+        <div class="comments-section">
+          <h4><i class="fa-solid fa-comments"></i> Comentarios Relevados & Análisis de Sentimiento</h4>
+          <div class="comments-list" id="modalCommentsList">
+            <!-- Comments rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Registrar / Agregar Nueva Publicación -->
+  <div class="modal-backdrop" id="addPostModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h3>Registrar Nueva Publicación en el Monitoreo</h3>
+          <p class="modal-subtitle">Agrega un nuevo post de LinkedIn o artículo de prensa sobre el proyecto Kachi y Lilac Solutions</p>
+        </div>
+        <button class="modal-close" id="btnCloseAddModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="addPostForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="formSource">Medio / Autor *</label>
+              <input type="text" id="formSource" placeholder="Ej: Minería Sustentable, Bárbara Cozzi, El Ancasti..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="formPlatform">Plataforma *</label>
+              <select id="formPlatform" required>
+                <option value="linkedin">LinkedIn</option>
+                <option value="web">Portal Web / Periódico</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="formTitle">Título / Texto de la Publicación *</label>
+              <input type="text" id="formTitle" placeholder="Ej: Kachi: Catamarca abrió la consulta pública ambiental..." required>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="formUrl">Enlace / URL de la Publicación</label>
+              <input type="url" id="formUrl" placeholder="Ej: https://lnkd.in/d3kr7j_q o https://mineriasustentable.com.ar/...">
+            </div>
+
+            <div class="form-group">
+              <label for="formLikes">Cantidad de Likes / Reacciones</label>
+              <input type="number" id="formLikes" min="0" value="0">
+            </div>
+
+            <div class="form-group">
+              <label for="formShares">Cantidad de Compartidos / Reposts</label>
+              <input type="number" id="formShares" min="0" value="0">
+            </div>
+
+            <div class="form-group">
+              <label for="formSentiment">Sentimiento Predominante</label>
+              <select id="formSentiment">
+                <option value="positivo">🟢 Positivo (Inversión / Avance DLE)</option>
+                <option value="neutro">🟡 Neutro (Informativo / Consultas)</option>
+                <option value="inquietud">🔴 Inquietud Ambiental</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="formComments">Comentarios Destacados (Separa comentarios con un salto de línea)</label>
+              <textarea id="formComments" rows="3" placeholder="Ej: Excelente avance para Catamarca!&#10;¿Dónde se puede consultar el informe completo?"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="btnCancelAdd">Cancelar</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar en Monitoreo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
