@@ -50,7 +50,7 @@ const INITIAL_POSTS = [
     platform: "web",
     title: "Catamarca fija fecha para la Audiencia Pública del proyecto de litio Kachi",
     content: "El 27 de agosto se llevará a cabo la audiencia en El Peñón. La empresa busca la aprobación del Informe de Impacto Ambiental para iniciar la fase de financiamiento directo de la construcción de la planta de Extracción Directa de Litio impulsada por Lilac Solutions.",
-    url: "https://fuerzaminera.com/kachi-catamarca-consulta-publica",
+    url: "https://fuerzaminera.com",
     likes: 85,
     shares: 14,
     commentsCount: 8,
@@ -67,7 +67,7 @@ const INITIAL_POSTS = [
     platform: "linkedin",
     title: "Tecnología DLE de Lilac Solutions y Lake Resources bajo escrutinio público",
     content: "Con el inicio de la participación ciudadana del IIA de Kachi, se difunden las especificaciones del proceso de extracción directa de Lilac y reinyección ambiental superior al 95%. La resolución de la DIA se proyecta para finales de septiembre de 2026.",
-    url: "https://infomineroarg.com/kachi-participacion-ciudadana",
+    url: "https://infomineroarg.com",
     likes: 198,
     shares: 31,
     commentsCount: 15,
@@ -84,7 +84,7 @@ const INITIAL_POSTS = [
     platform: "web",
     title: "Participación Ciudadana en Catamarca: IIA del Proyecto Kachi",
     content: "Detalle de los talleres informativos y mesas de trabajo comunitarias planificadas por Lake Resources y Lilac Solutions durante agosto en la zona de influencia directa de Carachi Pampa y El Peñón.",
-    url: "https://futurosustentable.com.ar/participacion-kachi",
+    url: "https://futurosustentable.com.ar",
     likes: 76,
     shares: 12,
     commentsCount: 6,
@@ -121,7 +121,6 @@ async function fetchPostsAndInit() {
       postsData = INITIAL_POSTS;
     }
   } catch (err) {
-    console.log("Cargando catálogo inicial de publicaciones...");
     postsData = JSON.parse(localStorage.getItem("kachi_lilac_posts_data")) || INITIAL_POSTS;
   }
 
@@ -138,7 +137,6 @@ function initDashboard() {
   renderPostsList();
 }
 
-// KPI Calculation & Rendering
 function renderKPIs() {
   const totalPosts = postsData.length;
   const totalLikes = postsData.reduce((acc, p) => acc + p.likes, 0);
@@ -156,7 +154,6 @@ function renderKPIs() {
   document.getElementById("kpiSentiment").innerHTML = `${positivePercentage}% <small>Positivo</small>`;
 }
 
-// Render Charts with Lilac Colors (#C598FE, #A855F7, #34D399, #FBBF24)
 function renderCharts() {
   const ctxTrend = document.getElementById("chartTrend").getContext("2d");
   if (chartTrendInstance) chartTrendInstance.destroy();
@@ -261,7 +258,7 @@ function totalLikesShares() {
   return postsData.reduce((acc, p) => acc + p.likes + p.shares, 0);
 }
 
-// Render Feed List
+// Render Feed List - Guaranteed Clickable Anchor & window.open Fallback
 function renderPostsList() {
   const container = document.getElementById("postsList");
   const searchVal = document.getElementById("searchInput").value.toLowerCase();
@@ -297,10 +294,12 @@ function renderPostsList() {
             <span>${post.role || 'Medio de Comunicación'} • ${post.date}</span>
           </div>
         </div>
-        <div class="platform-badge ${post.platform}">
+        <!-- Guaranteed Clickable Badge Link -->
+        <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="platform-badge ${post.platform}" onclick="window.open('${post.url}', '_blank'); return false;" title="Abrir fuente en ${post.platform === 'linkedin' ? 'LinkedIn' : 'Portal Web'}">
           <i class="fa-brands ${post.platform === 'linkedin' ? 'fa-linkedin' : 'fa-globe'}"></i>
           ${post.platform === 'linkedin' ? 'LinkedIn' : 'Portal Web'}
-        </div>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 3px;"></i>
+        </a>
       </div>
 
       <div class="post-content">
@@ -324,7 +323,7 @@ function renderPostsList() {
         <button class="btn btn-outline btn-sm" onclick="openCommentsModal('${post.id}')">
           <i class="fa-solid fa-comments"></i> Ver Comentarios (${post.comments ? post.comments.length : post.commentsCount})
         </button>
-        <a href="${post.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+        <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" onclick="window.open('${post.url}', '_blank'); return false;">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir a la Fuente
         </a>
       </div>
@@ -338,7 +337,6 @@ function getSentimentLabel(sentiment) {
   return "🔴 Inquietud Ambiental";
 }
 
-// Modal Handlers
 function openCommentsModal(postId) {
   const post = postsData.find(p => p.id === postId);
   if (!post) return;
@@ -387,7 +385,6 @@ function setupEventListeners() {
   document.getElementById("filterPlatform").onchange = renderPostsList;
   document.getElementById("filterSentiment").onchange = renderPostsList;
 
-  // Add Form Submit
   document.getElementById("addPostForm").onsubmit = async (e) => {
     e.preventDefault();
 
@@ -434,7 +431,6 @@ function setupEventListeners() {
     document.getElementById("addPostForm").reset();
   };
 
-  // Simulation Toggle
   document.getElementById("btnToggleSimulate").onclick = () => {
     isSimulating = !isSimulating;
     const btn = document.getElementById("btnToggleSimulate");
@@ -460,7 +456,6 @@ function setupEventListeners() {
     }
   };
 
-  // Export Data
   document.getElementById("btnExportData").onclick = () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(postsData, null, 2));
     const downloadAnchor = document.createElement('a');

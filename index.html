@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Chart.js for analytics graphs -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <!-- Styles with cache busting -->
+  <link rel="stylesheet" href="styles.css?v=1.0.4">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <!-- Header Action Buttons - Fixed Single Line Pill Styling -->
+      <!-- Header Action Buttons - First Example Colors Restored -->
       <div class="header-actions">
         <div class="live-badge" id="liveStatus">
           <span class="pulse-dot"></span> MONITOREO LILAC
@@ -62,7 +62,7 @@
         <i class="fa-solid fa-droplet"></i>
       </div>
       <div class="banner-text">
-        <div class="eyebrow">● SAN FRANCISCO TECH MONITORING ARCHITECTURE</div>
+        <div class="eyebrow">● MONITOREO INSTITUCIONAL DE PRENSA Y REDES</div>
         <h3>Consulta Pública e IIA - Proyecto Kachi (El Peñón, Catamarca)</h3>
         <p>Seguimiento de la opinión pública, redes y medios sobre el avance regulatorio y la tecnología DLE para la <strong>Audiencia Pública del 27 de Agosto en El Peñón</strong>.</p>
       </div>
@@ -74,7 +74,7 @@
       </div>
     </section>
 
-    <!-- KPI Summary Grid with Silicon Valley Delta Indicators -->
+    <!-- KPI Summary Grid -->
     <section class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-head">
@@ -300,6 +300,7 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- Cache busting version parameter added -->
+  <script src="app.js?v=1.0.4"></script>
 </body>
 </html>
